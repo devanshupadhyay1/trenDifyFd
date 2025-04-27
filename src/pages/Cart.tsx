@@ -1,6 +1,6 @@
 import { useCart } from "../context/CartContext.tsx";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // Importing backend URL from .env
+const BACKEND_URL = import.meta.env.VITE_API_URL; 
 
 const Cart: React.FC = () => {
   const { cartItems, removeFromCart } = useCart();

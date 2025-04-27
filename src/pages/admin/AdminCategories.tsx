@@ -6,7 +6,7 @@ interface Category {
   name: string;
 }
 
-const API_BASE_URL = "https://trendifybd.onrender.com "; 
+const API_BASE_URL = "https://tren-dify-bd.vercel.app"; 
 
 const AdminCategory: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
