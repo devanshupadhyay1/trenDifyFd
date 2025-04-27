@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = "https://trendifybd.onrender.com";
+
 interface OrderItem {
   id: number;
   quantity: number;
@@ -24,7 +26,7 @@ const AdminOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/orders");
+        const res = await axios.get(`${API_BASE_URL}/api/orders`);
         setOrders(res.data);
       } catch (err) {
         console.error("Error fetching orders:", err);

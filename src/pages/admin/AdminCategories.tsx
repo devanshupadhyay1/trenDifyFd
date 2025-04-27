@@ -6,13 +6,15 @@ interface Category {
   name: string;
 }
 
+const API_BASE_URL = "https://trendifybd.onrender.com "; 
+
 const AdminCategory: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategory, setNewCategory] = useState("");
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const res = await axios.get("http://localhost:5000/api/categories");
+      const res = await axios.get(`${API_BASE_URL}/api/categories`);
       setCategories(res.data);
     };
     fetchCategories();
@@ -20,7 +22,7 @@ const AdminCategory: React.FC = () => {
 
   const handleAddCategory = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/categories", {
+      const res = await axios.post(`${API_BASE_URL}/api/categories`, {
         name: newCategory,
       });
       setCategories([...categories, res.data]);
@@ -31,8 +33,12 @@ const AdminCategory: React.FC = () => {
   };
 
   const deleteCategory = async (id: number) => {
-    await axios.delete(`http://localhost:5000/api/categories/${id}`);
-    setCategories(categories.filter((c) => c.id !== id));
+    try {
+      await axios.delete(`${API_BASE_URL}/api/categories/${id}`);
+      setCategories(categories.filter((c) => c.id !== id));
+    } catch (err) {
+      console.error("Error deleting category:", err);
+    }
   };
 
   return (

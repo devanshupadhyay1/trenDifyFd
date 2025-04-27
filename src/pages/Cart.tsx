@@ -1,5 +1,7 @@
 import { useCart } from "../context/CartContext.tsx";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // Importing backend URL from .env
+
 const Cart: React.FC = () => {
   const { cartItems, removeFromCart } = useCart();
   console.log("Cart Items:", cartItems);
@@ -8,7 +10,7 @@ const Cart: React.FC = () => {
 
   const handleCheckout = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/create-checkout-session", {
+      const res = await fetch(`${BACKEND_URL}/api/create-checkout-session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

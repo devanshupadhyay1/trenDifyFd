@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = "https://trendifybd.onrender.com"; 
+
 const AdminDashboard = () => {
   const [totalSales, setTotalSales] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
@@ -9,8 +11,8 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const ordersRes = await axios.get("http://localhost:5000/api/orders");
-        const productsRes = await axios.get("http://localhost:5000/api/products");
+        const ordersRes = await axios.get(`${API_BASE_URL}/api/orders`);
+        const productsRes = await axios.get(`${API_BASE_URL}/api/products`);
 
         const orders = ordersRes.data;
         const products = productsRes.data;

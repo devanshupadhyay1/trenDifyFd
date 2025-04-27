@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
 
 const Checkout: React.FC = () => {
   const { cartItems } = useCart();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
+
+  // Render deployed backend URL from .env
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Calculate total amount
   const totalAmount = cartItems.reduce(
@@ -34,25 +39,23 @@ const Checkout: React.FC = () => {
 
     const result = await stripe.createToken(cardElement);
 
-    // Correct way to extract token and error from result
     const { token, error } = result;
 
     if (error) {
-      console.error(error.message); // Display error message
+      console.error(error.message);
       setLoading(false);
       return;
     }
 
-    // If token is created successfully, process payment
     try {
-      const response = await fetch("http://localhost:5000/payment", {
+      const response = await fetch(`${API_URL}/payment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          token: token.id, // Pass the token's ID to the backend
-          amount: totalAmount * 100, // Convert total amount to cents
+          token: token.id,
+          amount: totalAmount * 100, // amount in cents
         }),
       });
 
@@ -61,8 +64,7 @@ const Checkout: React.FC = () => {
       if (data.success) {
         alert("Payment successful!");
         setLoading(false);
-        // Redirect or display a success message
-        window.location.href = "/thank-you"; // Or use React Router to navigate
+        navigate("/thank-you"); // Use navigate instead of window.location
       } else {
         alert("Payment failed. Please try again.");
         setLoading(false);
@@ -117,4 +119,4 @@ const Checkout: React.FC = () => {
   );
 };
 
-export default Checkout
+export default Checkout;

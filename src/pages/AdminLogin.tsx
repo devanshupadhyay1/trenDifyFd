@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// Set your Render backend URL
+const BACKEND_URL = "https://trendifybd.onrender.com"; // <-- update this with your real backend link
+
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +21,7 @@ const AdminLogin = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/admin/login", {
+      const res = await axios.post(`${BACKEND_URL}/api/admin/login`, {
         email,
         password,
       });

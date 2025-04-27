@@ -19,6 +19,8 @@ interface Category {
   name: string;
 }
 
+const API_BASE_URL = "https://trendifybd.onrender.com "; 
+
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -28,7 +30,7 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/products");
+        const res = await axios.get(`${API_BASE_URL}/api/products`);
         setProducts(res.data);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -37,7 +39,7 @@ const Home = () => {
 
     const fetchCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/categories");
+        const res = await axios.get(`${API_BASE_URL}/api/categories`);
         setCategories(res.data);
       } catch (err) {
         console.error("Error fetching categories:", err);

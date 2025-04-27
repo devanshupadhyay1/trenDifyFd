@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = "https://trendifybd.onrender.com ";
+
 interface Product {
   id: number;
   name: string;
@@ -27,8 +29,8 @@ const AdminProduct: React.FC = () => {
 
   useEffect(() => {
     const fetchAll = async () => {
-      const prodRes = await axios.get("http://localhost:5000/api/products");
-      const catRes = await axios.get("http://localhost:5000/api/categories");
+      const prodRes = await axios.get(`${API_BASE_URL}/api/products`);
+      const catRes = await axios.get(`${API_BASE_URL}/api/categories`);
       setProducts(prodRes.data);
       setCategories(catRes.data);
     };
@@ -36,14 +38,14 @@ const AdminProduct: React.FC = () => {
   }, []);
 
   const deleteProduct = async (id: number) => {
-    await axios.delete(`http://localhost:5000/api/products/${id}`);
+    await axios.delete(`${API_BASE_URL}/api/products/${id}`);
     setProducts(products.filter((p) => p.id !== id));
   };
 
   const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/products", {
+      const res = await axios.post(`${API_BASE_URL}/api/products`, {
         name: formData.name,
         price: parseFloat(formData.price),
         image: formData.image,
