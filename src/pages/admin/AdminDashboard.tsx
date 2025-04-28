@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "https://tren-dify-bd.vercel.app"; 
+const API_BASE_URL = "trendifybd-production.up.railway.app"; 
 
 const AdminDashboard = () => {
   const [totalSales, setTotalSales] = useState(0);

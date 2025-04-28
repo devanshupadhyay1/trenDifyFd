@@ -19,7 +19,7 @@ interface Category {
   name: string;
 }
 
-const API_BASE_URL = "https://tren-dify-bd.vercel.app"; 
+const API_BASE_URL = "trendifybd-production.up.railway.app"; 
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);

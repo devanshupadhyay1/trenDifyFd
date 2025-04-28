@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // Set your Render backend URL
-const BACKEND_URL = "https://tren-dify-bd.vercel.app"; // <-- update this with your real backend link
+const BACKEND_URL = "trendifybd-production.up.railway.app"; // <-- update this with your real backend link
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
