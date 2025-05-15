@@ -27,7 +27,8 @@ const Products: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
+        // FIXED: Removed duplicate /api
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/products`);
         setProducts(res.data);
       } catch (err) {
         console.error("Error fetching products:", err);
